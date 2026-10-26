@@ -1,8 +1,27 @@
 import json
+import os
 
-def load_todo():
-    with open("data/todo.json", "r") as file:
-        tododata = json.load(file)
-    print(tododata)
+file = "data/todo.json"
 
-    
+def checkfile():
+    os.makedirs(os.path.dirname(file), exist_ok=True)
+    if not os.path.exists(file):
+        with open(file, "w") as f:
+            json.dump([], f)
+
+def readfile():
+    checkfile()
+    with open(file, "r") as f:
+        return json.load(f)
+
+def writefile(todos):
+    with open(file, "w") as f:
+        json.dump(todos, f, indent=2)
+
+def printtodos(todos):
+    if not todos:
+        print("none found")
+        return
+    for i in todos:
+        status = "x" if i.get("done") else " "
+        print(f"{status} {i['id']} {i['task']}")
