@@ -25,3 +25,14 @@ def printtodos(todos):
     for i in todos:
         status = "x" if i.get("done") else " "
         print(f"{status} {i['id']} {i['task']}")
+
+def loadtodo():
+    with open(file, "r") as f:
+        todos = json.load(f)
+
+    if not todos:
+        print("none")
+        return
+
+    for todo in todos:
+        print(f"[{'x' if todo['done'] else ' '}] {todo['id']} {todo['task']} ")
