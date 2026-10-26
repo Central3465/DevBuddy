@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from modules.todo import load_todo
+from modules.todo import loadtodo, edittodoui
 
 terminal_size = os.get_terminal_size() 
 width = terminal_size.columns # because os.get_terminal_size() returns a tuple object
@@ -19,7 +19,8 @@ def main():
     args = parser.parse_args()
 
     if args.tool == "todo":
-        load_todo()
+        loadtodo()
+        edittodoui()
 
 if __name__ == "__main__":
     main()

@@ -36,3 +36,52 @@ def loadtodo():
 
     for todo in todos:
         print(f"[{'x' if todo['done'] else ' '}] {todo['id']} {todo['task']} ")
+
+def edittodoui():
+    print("\nCommands:")
+    print(" [e] edit  [d] delete  [a] add  [q] quit")
+    choice = input("Enter command:").strip().lower()
+
+    todos = loadtodo()
+
+    if choice == "e":
+        try:
+            toid = int(input("edit id: "))
+        except ValueError:
+            print("invalid id")
+            return
+        for i in todos:
+            if i["id"] == toid:
+                new_task = input(f"new task [{i['task']}]:").strip()
+                if new_task:
+                    i["task"] = new_task
+                    writefile(todos)
+                    print(f"updated #{toid}")
+                return
+        print(f"todo #{toid} not found")
+    elif choice == "d":
+        try:
+            toid = int(input("delete id: "))
+        except ValueError:
+            print("invalid id")
+            return
+        before = len(todos)
+        todos = [i for i in todos if i['id'] != toid]
+        if len(todos) == before:
+            print(f"no todo with id {toid}")
+        else:
+            writefile(todos)
+            print(f"deleted: {toid}")
+    elif choice == "q":
+        return
+    elif choice == "a":
+        task = input("new task: ").strip()
+        if not task:
+            print("cancelled")
+            return
+        newid = max((i["id"] for i in todos), default=0) + 1
+        todos.append({"id": newid, "task": task, "done": False})
+        writefile(todos)
+        print(f"added #{newid}: {task}")
+    else:
+        print("unknown cmd")
