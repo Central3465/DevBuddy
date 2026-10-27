@@ -1,12 +1,7 @@
 [
   {
-    "id": 2,
-    "task": "Write README",
-    "done": true
-  },
-  {
-    "id": 3,
-    "task": "go plat a crop",
+    "id": 1,
+    "task": "To complete Week 2 of Terra.",
     "done": false
   }
 ]

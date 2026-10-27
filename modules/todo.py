@@ -45,7 +45,7 @@ def loadtodo():
 def edittodoui():
     while True:
         print("\nCommands:")
-        print(" [e] edit  [d] delete  [a] add  [q] quit")
+        print(" [e] edit  [d] delete  [a] add  [q] quit [s] show\n")
         choice = input("Enter command: ").strip().lower()
 
         todos = readfile()
@@ -95,6 +95,9 @@ def edittodoui():
 
         elif choice == "q":
             return
+
+        elif choice == "s":
+            printtodos(todos)
 
         else:
             print("unknown cmd")
