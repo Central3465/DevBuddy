@@ -49,4 +49,4 @@ def ui():
         except Exception as e:
             print(e)
     else:
-        print("Your usage to Codex has been reached. Please wait")
+        print("Your usage to Codex has been reached. Please wait.")
