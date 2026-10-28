@@ -45,7 +45,7 @@ def loadtodo():
 def edittodoui():
     while True:
         print("\nCommands:")
-        print(" [e] edit  [d] delete  [a] add  [q] quit [s] show\n")
+        print(" [c] complete  [e] edit  [d] delete  [a] add  [q] quit [s] show\n")
         choice = input("Enter command: ").strip().lower()
 
         todos = readfile()
@@ -98,6 +98,27 @@ def edittodoui():
 
         elif choice == "s":
             printtodos(todos)
+
+        elif choice == "c":
+            todos = readfile()
+
+            try:
+                idtodo = int(input("ID of the todo you want to complete: "))
+            except ValueError:
+                print("invalid id")
+                continue
+            
+            for i in todos:
+                if i["id"] == idtodo:
+                    if i["done"]:
+                        print("already completed")
+                    else:
+                        i["done"] = True
+                        writefile(todos)
+                        print(f"completed todos #{idtodo}")
+                    break
+                else:
+                    print(f"No todoo found with ID {idtodo}")
 
         else:
             print("unknown cmd")
