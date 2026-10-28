@@ -16,10 +16,14 @@ client = OpenAI(api_key=api_key)
 
 
 def getResponse(prompt):
-    # response = client.responses.create(model="gpt-6-luna", instructions="You are a coding assistant that will answer in a short, concise way with no waffling.", input=prompt)
+    response = client.responses.create(model="gpt-6-luna", instructions="You are a coding assistant that will answer in a short, concise way with no waffling.", input=prompt)
     # for cost purposes, i use gpt-6-luna, you can of course use a smarter model with your own credits
-    response = "test"
     return response
+
+def saveResponse(prompt, response):
+    data = {"prompt": prompt, "response": response}
+    with open("data/chat.json", "w") as d:
+        json.dump(data, d, indent=4)
 
 def ui():
     while True:
@@ -42,6 +46,7 @@ def ui():
         try:
             answer = getResponse(prompt)
             print("\nAnswer: \n")
+            saveResponse(prompt, answer)
             print(answer)
         except Exception as e:
             print(e)
