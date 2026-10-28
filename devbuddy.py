@@ -14,7 +14,7 @@ def main():
 
     parser = argparse.ArgumentParser( prog= "devbuddy", description="Your personal dev toolkit.")
 
-    parser.add_argument( "tool", choices=["todo", "checklist", "stats", "ai-chat"], help="Tool you want to use...")
+    parser.add_argument( "tool", choices=["todo", "codex"], help="Tool you want to use...")
 
     args = parser.parse_args()
 

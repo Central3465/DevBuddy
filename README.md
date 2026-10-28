@@ -7,6 +7,13 @@ To get the commands available, use --help.
 
 i do plan creating an .exe file in Releases
 
+# installation
+requires the following packages:
+- json
+- os
+- openai
+- argparse
+
 # privacy
 all data is stored in a json file in the data folder and is never sent to my servers or stored on the web
 
@@ -17,6 +24,9 @@ this needs to be available for the ai coding assistant to work:
 # contributing
 sure go ahead, check and test your code before you send a pr
 one more thing, no vibe coding
+
+# credits
+OpenAI - https://developers.openai.com/api/reference/python
 
 # license
 MIT License.
