@@ -1,0 +1,18 @@
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "devbuddy-cli"
+version = "0.1.0"
+description = "A command-line toolkit for everyday developer tasks"
+requires-python = ">=3.10"
+dependencies = ["openai"]
+
+[project.scripts]
+devbuddy = "devbuddy:main"
+db = "devbuddy:main"
+
+[tool.setuptools]
+py-modules = ["devbuddy"]
