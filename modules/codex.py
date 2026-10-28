@@ -21,10 +21,8 @@ def getResponse(prompt):
     response = "test"
     return response
 
-
 def ui():
-    attempts = 0
-    while attempts < 5:
+    while True:
         print(
             "\nWelcome to Codex (BAIDEX). Ask a question below and GPT-6-Luna will answer!"
         )
@@ -43,10 +41,7 @@ def ui():
             continue
         try:
             answer = getResponse(prompt)
-            attempts = attempts + 1
             print("\nAnswer: \n")
             print(answer)
         except Exception as e:
             print(e)
-    else:
-        print("Your usage to Codex has been reached. Please wait.")
