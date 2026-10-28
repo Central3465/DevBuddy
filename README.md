@@ -22,7 +22,7 @@ this needs to be available for the ai coding assistant to work:
 `OPENAI_API_KEY`
 
 # contributing
-sure go ahead, check and test your code before you send a pr
+sure go ahead, check and test your code before you send a pr. 
 one more thing, no vibe coding
 
 # credits
