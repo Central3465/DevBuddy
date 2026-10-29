@@ -22,9 +22,18 @@ def getResponse(prompt):
     return response
 
 def saveResponse(prompt, response):
-    data = {"prompt": prompt, "response": response}
+    data = {"prompt": prompt, "response": response.output_text}
+
+    try:
+        with open("data/chat.json", "r") as d:
+            chathist = json.load(d)
+    except (FileNotFoundError, json.JSONDecodeError):
+        chathist = []
+
+    chathist.append(data)
+
     with open("data/chat.json", "w") as d:
-        json.dump(data, d, indent=4)
+        json.dump(chathist, d, indent=4)
 
 def ui():
     while True:
