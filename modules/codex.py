@@ -35,6 +35,11 @@ def saveResponse(prompt, response):
     with open("data/chat.json", "w") as d:
         json.dump(chathist, d, indent=4)
 
+def getHistory():
+    with open("data/chat.json", "r") as d:
+        savhist = json.load(d)
+    return savhist
+
 def ui():
     while True:
         print(
