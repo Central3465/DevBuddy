@@ -2,16 +2,16 @@ import random
 from datetime import datetime
 import json
 import os
+import requests
 
 current_date = datetime.now().strftime("%Y-%m-%d")
 
-motivation = [
-    "Want that Framework laptop or Apple iPad from Terra? If so, then get coding bucko!",
-    "Your mind isn't working if you just doomscroll all day.",
-    "Your github profile heatmap isn't going to grow unless you actually commit.",
-    "Come on, what are you doing? GEt coding!",
-    "You can do it!"
-]
+def fetchmotivation():
+    url = "https://zenquotes.io/api/random"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        return data[0]["q"]
 
 def checkfile():
     file = "data/motivation.json"
@@ -30,11 +30,11 @@ def show():
         if data == {}:
             data = {"date": "", "quote": ""}
     if data.get("date") == current_date:
-        print("Come back tomorrow!")
+        print("You have reached your daily motivation limit. Come back tomorrow!\n")
+        print(f"Today's motivation was: {data.get('quote')}")
         return
-    poo = random.randint(0, len(motivation) - 1)
-    quote = motivation[poo]
-    data = {"date": current_date, "quote": quote}
+    motivation = fetchmotivation()
+    data = {"date": current_date, "quote": motivation}
     with open(file, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
-    print(quote)
+    print(motivation)
