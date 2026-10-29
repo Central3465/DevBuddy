@@ -31,7 +31,7 @@ Still to do: bundling this into an `.exe` and putting it in Releases, so non-Peo
 You need Python 3.10+ (the `pyproject.toml` says so, and I see no reason to argue with it).
 
 ```bash
-git clone <this repo>
+git clone https://github.com/Central3465/DevBuddy.git
 cd devbuddy
 pip install openai python-dotenv
 ```
@@ -65,7 +65,7 @@ In the interest of honesty (and pre-empting your issues):
 
 - The welcome banner prints a fixed row of dashes that assumes a wide terminal. On narrow terminals it wraps and looks like a very depressed comb. I want to fix this at some point.
 - `give-me-motivation` expects `data/motivation.json` to exist. Todo creates its data files on demand; motivation just... trusts you. If it crashes with `FileNotFoundError`, make the folder and an empty `{}` file. Riveting bug, I know.
-- Rate limits on the free-tier model are harsh by design (my wallet, my rules). **This is no longer a thing, it is now strictly BYOK.**
+- ~Rate limits on the free-tier model are harsh by design (my wallet, my rules).~ **This is no longer a thing, it is now strictly BYOK.**
 - Error handling is best described as "optimistic".
 
 ## Contributing
