@@ -13,6 +13,7 @@ requires the following packages:
 - os
 - openai
 - argparse
+- python-dotenv
 
 # privacy
 all data is stored in a json file in the data folder and is never sent to my servers or stored on the web
