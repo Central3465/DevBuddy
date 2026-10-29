@@ -10,7 +10,8 @@ api_key = os.environ.get(
     "OPENAI_API_KEY"
 )  # attempt to fix openai strange issue of not recognizing env previously
 if not api_key:
-    raise RuntimeError("no variable set")
+    print("no openai api variable set")
+    api_key = "sk_1234_replaceme"
 
 client = OpenAI(api_key=api_key)
 
