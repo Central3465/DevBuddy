@@ -67,7 +67,7 @@ Sure, go ahead. Check and test your code before you send a PR — I review these
 
 - OpenAI Python API — https://developers.openai.com/api/reference/python
 - Hackclub Terra, for existing and for week 2 being "build a CLI tool", which explains a great deal.
-- Coffee, which did most of the actual work.
+- ZenQuotes - https://zenquotes.io/?ref=public_apis
 
 ## License
 
