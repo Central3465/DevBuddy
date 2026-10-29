@@ -17,3 +17,10 @@ db = "devbuddy:main"
 [tool.setuptools]
 py-modules = ["devbuddy"]
 packages = ["modules"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_option]
+testpaths = ["tests"]
+pythonpath = ["."]  
