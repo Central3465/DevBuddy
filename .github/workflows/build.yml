@@ -15,7 +15,7 @@ jobs:
           python-version: "3.12"
       - run: pip install pyinstaller requests openai python-dotenv
       - run: pyinstaller --onefile devbuddy.py
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: devbuddy-exe
           path: dist/devbuddy.exe
