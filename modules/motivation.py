@@ -13,12 +13,18 @@ motivation = [
     "You can do it!"
 ]
 
-file = "data/motivation.json"
+def checkfile():
+    file = "data/motivation.json"
+    dirname = os.path.dirname(file)
+    if dirname:
+        os.makedirs(dirname, exist_ok=True)
+    return file
 
 def ui():
     show()
 
 def show():
+    file = checkfile()
     with open(file, "r", encoding="utf-8") as f:
         data = json.load(f)
         if data == {}:
