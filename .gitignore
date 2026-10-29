@@ -2,3 +2,6 @@ __pycache__/
 data/*
 .env
 devbuddy_cli.egg-info/*
+build/*
+dist/*
+devbuddy.spec
