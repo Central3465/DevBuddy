@@ -8,10 +8,10 @@ terminal_size = os.get_terminal_size()
 width = terminal_size.columns # because os.get_terminal_size() returns a tuple object
 
 def main():
-    print("--------------------------------------------------------------------------------------------------------------------------------------------------------")
+    print("-" * width)
     print("Welcome to DevBuddy!".center(width))
     print("Your personal developer toolkit.".center(width))
-    print("--------------------------------------------------------------------------------------------------------------------------------------------------------")
+    print("-" * width)
 
     parser = argparse.ArgumentParser( prog= "devbuddy", description="Your personal dev toolkit.")
 

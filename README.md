@@ -59,15 +59,6 @@ Put it in a `.env` file in the project root (that's what `python-dotenv` is for)
 
 Everything is stored in JSON files in the `data/` folder (`todo.json`, `chat.json`, `motivation.json`). Nothing goes to any server of mine, because I don't *have* any servers. The only thing leaving your machine is your prompt to OpenAI's API, and only when you use codex. If you don't want that, don't use codex — todo and motivation work perfectly offline.
 
-## Known quirks and shortcomings
-
-In the interest of honesty (and pre-empting your issues):
-
-- The welcome banner prints a fixed row of dashes that assumes a wide terminal. On narrow terminals it wraps and looks like a very depressed comb. I want to fix this at some point.
-- `give-me-motivation` expects `data/motivation.json` to exist. Todo creates its data files on demand; motivation just... trusts you. If it crashes with `FileNotFoundError`, make the folder and an empty `{}` file. Riveting bug, I know.
-- ~Rate limits on the free-tier model are harsh by design (my wallet, my rules).~ **This is no longer a thing, it is now strictly BYOK.**
-- Error handling is best described as "optimistic".
-
 ## Contributing
 
 Sure, go ahead. Check and test your code before you send a PR — I review these things now, and it's humbling being the person who has to read past-you's code. One more thing: **no vibe coding.** If you can't explain why your change works, it doesn't (yet).
