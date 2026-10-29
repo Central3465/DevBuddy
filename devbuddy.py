@@ -2,8 +2,7 @@ import argparse
 import os
 
 from modules.todo import loadtodo, edittodoui
-from modules.codex import ui
-from modules.motivation import ui
+from modules import codex, motivation
 
 terminal_size = os.get_terminal_size() 
 width = terminal_size.columns # because os.get_terminal_size() returns a tuple object
@@ -24,9 +23,9 @@ def main():
         loadtodo()
         edittodoui()
     elif args.tool == "codex":
-        ui()
+        codex.ui()
     elif args.tool == "give-me-motivation":
-        ui()
+        motivation.ui()
 
 if __name__ == "__main__":
     main()
