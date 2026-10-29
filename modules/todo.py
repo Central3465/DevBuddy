@@ -117,8 +117,8 @@ def edittodoui():
                         writefile(todos)
                         print(f"completed todos #{idtodo}")
                     break
-                else:
-                    print(f"No todoo found with ID {idtodo}")
+            else:
+                print(f"No todoo found with ID {idtodo}")
 
         else:
             print("unknown cmd")
