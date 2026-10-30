@@ -13,31 +13,44 @@ if not api_key:
     print("no openai api variable set")
     api_key = "sk_1234_replaceme"
 
-client = OpenAI(api_key=api_key)
+client = OpenAI(api_key=api_key) if api_key else None # set client to None if no api key set
+
+def datapath(name):
+    path = os.path.join("data", name)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    return path
 
 
 def getResponse(prompt):
+    if client is None:
+        raise RuntimeError("api key not set")
     response = client.responses.create(model="gpt-6-luna", instructions="You are a coding assistant that will answer in a short, concise way with no waffling.", input=prompt)
     # for cost purposes, i use gpt-6-luna, you can of course use a smarter model with your own credits
     return response
 
 def saveResponse(prompt, response):
     data = {"prompt": prompt, "response": response.output_text}
+    chatfile = datapath("chat.json")
 
     try:
-        with open("data/chat.json", "r") as d:
+        with open(chatfile, "r") as d:
             chathist = json.load(d)
+        if not isinstance(chathist, list):
+            chathist = []
     except (FileNotFoundError, json.JSONDecodeError):
         chathist = []
 
     chathist.append(data)
 
-    with open("data/chat.json", "w") as d:
+    with open("chatfile", "w") as d:
         json.dump(chathist, d, indent=4)
 
 def getHistory():
-    with open("data/chat.json", "r") as d:
-        savhist = json.load(d)
+    try:
+        with open("data/chat.json", "r") as d:
+            savhist = json.load(d)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
     return savhist
 
 def ui():
