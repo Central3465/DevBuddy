@@ -17,13 +17,8 @@ class FakeResponse:
         return self.payload
 
 def test_daily_limit(monkeypatch, capsys):
-    today = motivation.current_date
-    with open(motivation.checkfile(), "w", encoding="utf-8") as f:
-        json.dump({"date": today, "quote": "Old quote"}, f)
-
-    def boom(*a, **k):
-        return AssertionError("should not fetch new quote when limit reahed")
-
+    def boom(*args, **kwargs):
+        return FakeResponse({"error": "You have exceeded your daily limit."}, status_code=429)
     monkeypatch.setattr(motivation.requests, "get", boom)
     motivation.show()
     out = capsys.readouterr().out

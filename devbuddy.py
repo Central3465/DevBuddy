@@ -5,10 +5,14 @@ from modules.todo import loadtodo, edittodoui
 from modules import codex, motivation
 from modules.getcommit import get_commit
 
-terminal_size = os.get_terminal_size() 
-width = terminal_size.columns # because os.get_terminal_size() returns a tuple object
+def get_width():
+    try:
+        return os.get_terminal_size().columns
+    except OSError:
+        return 80
 
 def main():
+    width = get_width()
     print("-" * width)
     print("Welcome to DevBuddy!".center(width))
     print("Your personal developer toolkit.".center(width))
@@ -29,7 +33,10 @@ def main():
         motivation.ui()
     elif args.tool == "version":
         sha = get_commit()
-        print(f"devbuddy version: {sha}")
+        if sha:
+            print(f"devbuddy version: {sha}")
+        else:
+            print("could not fetch version (unlikely error to get so i probably broke something)")
 
 if __name__ == "__main__":
     main()
