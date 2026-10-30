@@ -30,7 +30,7 @@ def printtodos(todos):
         return
     for i in todos:
         status = "x" if i.get("done") else " "
-        print(f"[{status}] {i['id']} {i['task']}")
+        print(f"[{status}] {i['id']} {i['task']} (priority: {i.get("priority", "medium")})")
 
 
 def loadtodo():
@@ -58,9 +58,14 @@ def edittodoui():
                 continue
             for i in todos:
                 if i["id"] == toid:
-                    new_task = input(f"new task [{i['task']}]: ").strip()
+                    new_task = input(f"new task [{i['task']}] (type none to skip): ").strip()
+                    priority = input(f"new priority [{i.get('priority', 'medium')}]: ").strip().lower()
                     if new_task:
+                        if new_task.lower() == "none":
+                            new_task = i["task"]
                         i["task"] = new_task
+                        if priority in ["medium", "high", "low"]:
+                            i["priority"] = priority
                         writefile(todos)
                         print(f"updated #{toid}")
                     else:
@@ -85,11 +90,15 @@ def edittodoui():
 
         elif choice == "a":
             task = input("new task: ").strip()
+            priority = input("priority (medium, high, low): ").strip().lower()
             if not task:
                 print("cancelled")
                 continue
+            if priority not in ["medium", "high", "low"]:
+                print("invalid priority, defaulting to medium")
+                priority = "medium"
             newid = max((i["id"] for i in todos), default=0) + 1
-            todos.append({"id": newid, "task": task, "done": False})
+            todos.append({"id": newid, "task": task, "done": False, "priority": priority})
             writefile(todos)
             print(f"added #{newid}: {task}")
 
