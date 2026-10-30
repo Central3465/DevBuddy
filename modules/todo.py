@@ -1,6 +1,7 @@
 import json
 import os
 import datetime
+from winotify import Notification, audio
 
 file = "data/todo.json"
 
@@ -42,10 +43,21 @@ def loadtodo():
         printtodos(todos)
     return todos
 
+def notify_todo():
+    todos = readfile()
+    for i in todos:
+        if not i.get("done") and i.get("due_date"):
+            due_date = datetime.datetime.strptime(i["due_date"], "%Y-%m-%d").date()
+            today = datetime.date.today()
+            if due_date == today:
+                notification = Notification(app_id="DevBuddy", title="Todo Reminder", msg=f"Task '{i['task']}' is due today!", duration="short")
+                notification.set_audio(audio.Default, loop=True)
+                notification.show()
 
 def edittodoui():
     while True:
         print("\nCommands:")
+        notify_todo()
         print(" [c] complete  [e] edit  [d] delete  [a] add  [q] quit [s] show [cd] clear done\n")
         choice = input("Enter command: ").strip().lower()
 
