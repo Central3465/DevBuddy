@@ -33,10 +33,8 @@ You need Python 3.10+ (the `pyproject.toml` says so, and I see no reason to argu
 ```bash
 git clone https://github.com/Central3465/DevBuddy.git
 cd devbuddy
-pip install openai python-dotenv
+pip install openai python-dotenv winotify
 ```
-
-A note on dependencies: the old README listed `json` and `os` as packages you needed to install. They are standard library modules. I know this now. Please pretend I never said otherwise; some mistakes haunt a person.
 
 If you want the proper grown-up install (a `devbuddy` / `db` command on your PATH):
 
@@ -44,6 +42,12 @@ If you want the proper grown-up install (a `devbuddy` / `db` command on your PAT
 pip install .
 devbuddy todo
 ```
+
+## The why for python packages
+
+- **Winotify** is used for Windows toast notifications.
+- **python-dotenv** is used to recognise .env files and variables.
+- **openai** is used for feeding my goldfish (use your prefrontal cortex).
 
 ## Configuration & environment variables
 
