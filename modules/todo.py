@@ -1,5 +1,6 @@
 import json
 import os
+import datetime
 
 file = "data/todo.json"
 
@@ -30,7 +31,7 @@ def printtodos(todos):
         return
     for i in todos:
         status = "x" if i.get("done") else " "
-        print(f"[{status}] {i['id']} {i['task']} (priority: {i.get("priority", "medium")})")
+        print(f"[{status}] {i['id']} {i['task']} (priority: {i.get("priority", "medium")}) (due: {i.get("due_date", "none")})")
 
 
 def loadtodo():
@@ -91,14 +92,23 @@ def edittodoui():
         elif choice == "a":
             task = input("new task: ").strip()
             priority = input("priority (medium, high, low): ").strip().lower()
+            due_date = input("due date (YYYY-MM-DD) (optional): ").strip()
             if not task:
                 print("cancelled")
                 continue
             if priority not in ["medium", "high", "low"]:
                 print("invalid priority, defaulting to medium")
                 priority = "medium"
+            if due_date:
+                try:
+                    datetime.datetime.strptime(due_date, "%Y-%m-%d")
+                except ValueError:
+                    print("invalid date format, ignoring...")
+                    due_date = None
+            else:
+                due_date = None
             newid = max((i["id"] for i in todos), default=0) + 1
-            todos.append({"id": newid, "task": task, "done": False, "priority": priority})
+            todos.append({"id": newid, "task": task, "done": False, "priority": priority, "due_date": due_date})
             writefile(todos)
             print(f"added #{newid}: {task}")
 
