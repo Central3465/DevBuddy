@@ -5,6 +5,7 @@ from modules.todo import loadtodo, edittodoui
 from modules import codex, motivation
 from modules.getcommit import get_commit
 from modules.pomodoro import start
+from modules.commitgenerator import run
 
 def get_width():
     try:
@@ -21,7 +22,7 @@ def main():
 
     parser = argparse.ArgumentParser( prog= "devbuddy", description="Your personal dev toolkit.")
 
-    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro"], help="Tool you want to use...")
+    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit"], help="Tool you want to use...")
 
     args = parser.parse_args()
 
@@ -35,6 +36,13 @@ def main():
     elif args.tool == "pomodoro":
         user = input("How long do you want your session? (in minutes): ")
         start(int(user))
+    elif args.tool == "commit":
+        commitmsg = run()
+        if commitmsg:
+            print("generated commit message:\n")
+            print(commitmsg)
+        else:
+            print("could not generate commit message")
     elif args.tool == "version":
         sha = get_commit()
         if sha:
