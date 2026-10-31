@@ -7,8 +7,8 @@ It's not fancy. It's not polished. But it works on my machine.
 ## What it actually does
 
 - **`todo`** — A todo list that lives in a JSON file. Add, edit, complete, delete tasks. No sync, no cloud, no accounts. Just you and your growing pile of undone chores.
-- **`codex`** — Ask GPT-6-Luna a coding question, get a short answer back (mostly). Your prompt history is saved locally to a JSON file to quit the squaffle with GDPR lalala. There's a "please confirm you'll use this responsibly" step, which I added because I'm legally nervous, not because typing "confirm" has ever stopped anybody.
-- **`give-me-motivation`** — One quote a day. Come back tomorrow for another one. Yes, even that is rate-limited not to stop anyone. I have learned nothing except rate limits yeahhhhh.
+- **`codex`** — Ask GPT-6-Luna a coding question, get a short answer back (mostly). Your prompt history is saved locally to a JSON file to quit the squaffle with GDPR. There's a "please confirm you'll use this responsibly" step, which I added because I want to, not because typing "confirm" has ever stopped anybody.
+- **`give-me-motivation`** — One quote a day. Come back tomorrow for another one. Yes, even that is rate-limited not to stop anyone.
 
 ## Usage
 
@@ -23,8 +23,6 @@ python devbuddy.py --help
 ```
 
 Pro tip: quitting most tools is `q` or `exit`. I'm not above stealing your Ctrl+C, but I haven't got around to it yet.
-
-Still to do: bundling this into an `.exe` and putting it in Releases, so non-People can use it without me having to explain what a "virtual environment" is.
 
 ## Installation
 
@@ -57,7 +55,7 @@ The AI assistant needs one thing to work:
 OPENAI_API_KEY=sk-your-key-here
 ```
 
-Put it in a `.env` file in the project root (that's what `python-dotenv` is for) or export it in your shell. Without it, codex will print a sad message and then politely fail, because I made it fall back to a placeholder key rather than crash like a reasonable program.
+Put it in a `.env` file in the project root (that's what `python-dotenv` is for) or export it in your shell. Without it, codex will print a sad message and then politely fail.
 
 ## Privacy
 
@@ -65,12 +63,11 @@ Everything is stored in JSON files in the `data/` folder (`todo.json`, `chat.jso
 
 ## Contributing
 
-Sure, go ahead. Check and test your code before you send a PR — I review these things now, and it's humbling being the person who has to read past-you's code. One more thing: **no vibe coding.** If you can't explain why your change works, it doesn't (yet).
+Sure, go ahead. Check and test your code before you send a PR. One more thing: **no vibe coding.** If you can't explain why your change works, it doesn't (yet).
 
 ## Credits
 
 - OpenAI Python API — https://developers.openai.com/api/reference/python
-- Hackclub Terra, for existing and for week 2 being "build a CLI tool", which explains a great deal.
 - ZenQuotes - https://zenquotes.io/?ref=public_apis
 
 ## License
