@@ -1,5 +1,18 @@
 import time
 import winotify
+import json
+
+def save_stats(stats):
+    try:
+        with open("data/stats.json", "r") as f:
+            history = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        history = []
+
+    history.append(stats)
+
+    with open("data/stats.json", "w") as f:
+        json.dump(history, f, indent=4)
 
 def breaktime(minutes):
     if minutes == "":
@@ -36,10 +49,9 @@ def start(minutes):
             if remaining == 0:
                 break
 
-            time.sleep(min(0.2, remaining))
 
         print("\nPomodoro session complete!")
-        breaktime(5)
+        save_stats({"last_session": time.time(), "duration": minutes})
 
         winotify._notify(title="Pomodoro Timer", message="Time's up! Take a break.", duration="long")
     except KeyboardInterrupt:
