@@ -1,7 +1,7 @@
 import time
 import winotify
 
-def start(minutes=25):
+def start(minutes):
     duration = int(minutes * 60)
     end_time = time.monotonic() + duration
     print(f"Starting a {minutes} minute Pomodoro session...")

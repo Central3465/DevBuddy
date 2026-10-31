@@ -33,7 +33,8 @@ def main():
     elif args.tool == "give-me-motivation":
         motivation.ui()
     elif args.tool == "pomodoro":
-        start()
+        user = input("How long do you want your session? (in minutes): ")
+        start(int(user))
     elif args.tool == "version":
         sha = get_commit()
         if sha:
