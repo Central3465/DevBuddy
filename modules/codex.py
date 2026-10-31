@@ -30,7 +30,7 @@ def getResponse(prompt):
 
 def saveResponse(prompt, response):
     data = {"prompt": prompt, "response": response.output_text}
-    chatfile = datapath("chat.json")
+    chatfile = datapath("data/chat.json")
 
     try:
         with open(chatfile, "r") as d:
@@ -41,8 +41,8 @@ def saveResponse(prompt, response):
         chathist = []
 
     chathist.append(data)
-
-    with open("chatfile", "w") as d:
+    
+    with open(chatfile, "w") as d:
         json.dump(chathist, d, indent=4)
 
 def getHistory():
