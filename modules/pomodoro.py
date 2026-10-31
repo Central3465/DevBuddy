@@ -1,5 +1,4 @@
 import time
-import winotify
 import json
 
 def save_stats(stats):
@@ -7,9 +6,9 @@ def save_stats(stats):
         with open("data/stats.json", "r") as f:
             history = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        history = []
+        history = {}
 
-    history.append(stats)
+    history.update(stats)
 
     with open("data/stats.json", "w") as f:
         json.dump(history, f, indent=4)
@@ -29,7 +28,6 @@ def breaktime(minutes):
                 break
             time.sleep(min(0.2, remaining))
         print("\nBreak time is over! Get back to work!")
-        winotify._notify(title="Pomodoro Timer", message="Break time is over! Get back to work!", duration="long")
         start(25)
     except KeyboardInterrupt:
         print("\nOh well, time is lost, you can go back to work!")
@@ -52,7 +50,6 @@ def start(minutes):
 
         print("\nPomodoro session complete!")
         save_stats({"last_session": time.time(), "duration": minutes})
-
-        winotify._notify(title="Pomodoro Timer", message="Time's up! Take a break.", duration="long")
+        breaktime(5)
     except KeyboardInterrupt:
         print("\nYou cancelled it with Ctrl+C. Next time, don't do that, I'm always watching...")
