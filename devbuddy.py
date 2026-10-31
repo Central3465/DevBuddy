@@ -4,6 +4,7 @@ import os
 from modules.todo import loadtodo, edittodoui
 from modules import codex, motivation
 from modules.getcommit import get_commit
+from modules.pomodoro import start
 
 def get_width():
     try:
@@ -20,7 +21,7 @@ def main():
 
     parser = argparse.ArgumentParser( prog= "devbuddy", description="Your personal dev toolkit.")
 
-    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version"], help="Tool you want to use...")
+    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro"], help="Tool you want to use...")
 
     args = parser.parse_args()
 
@@ -31,6 +32,8 @@ def main():
         codex.ui()
     elif args.tool == "give-me-motivation":
         motivation.ui()
+    elif args.tool == "pomodoro":
+        start()
     elif args.tool == "version":
         sha = get_commit()
         if sha:
