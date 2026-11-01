@@ -8,6 +8,7 @@ from modules.pomodoro import start
 from modules.commitgenerator import run
 from modules.uptime import check
 from modules.env import list, scan 
+from modules.dependanalyse import find_dependencies, scan_txt, scan_toml
 
 def get_width():
     try:
@@ -24,7 +25,7 @@ def main():
 
     parser = argparse.ArgumentParser( prog= "devbuddy", description="Your personal dev toolkit.")
 
-    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime", "env"], help="Tool you want to use...")
+    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime", "env", "analyse"], help="Tool you want to use...")
 
     args = parser.parse_args()
 
@@ -38,6 +39,20 @@ def main():
     elif args.tool == "pomodoro":
         user = input("How long do you want your session? (in minutes): ")
         start(int(user))
+    elif args.tool == "analyse":
+        print("Scanning for dependencies...\n")
+
+        files = find_dependencies(".")
+
+        if not files:
+            print("No dependency files found.")
+            return
+
+        for file in files:
+            if file.endswith(".txt"):
+                scan_txt(file)
+            elif file.endswith(".toml"):
+                scan_toml(file)
     elif args.tool == "uptime":
         url = input("URL to check uptime: ")
         print("Checking\n", url)
