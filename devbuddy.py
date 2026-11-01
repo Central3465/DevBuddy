@@ -6,6 +6,7 @@ from modules import codex, motivation
 from modules.getcommit import get_commit
 from modules.pomodoro import start
 from modules.commitgenerator import run
+from modules.uptime import check
 
 def get_width():
     try:
@@ -22,7 +23,7 @@ def main():
 
     parser = argparse.ArgumentParser( prog= "devbuddy", description="Your personal dev toolkit.")
 
-    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit"], help="Tool you want to use...")
+    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime"], help="Tool you want to use...")
 
     args = parser.parse_args()
 
@@ -36,6 +37,19 @@ def main():
     elif args.tool == "pomodoro":
         user = input("How long do you want your session? (in minutes): ")
         start(int(user))
+    elif args.tool == "uptime":
+        url = input("URL to check uptime: ")
+        print("Checking\n", url)
+        result = check(url)
+        if result:
+            status_code, ok, elapsed, headers, cookies = result
+            print(f"Status code: {status_code}\n")
+            print(f"OK: {ok}\n")
+            print(f"Time to fetch: {elapsed} seconds\n")
+            print(f"Headers: {headers}\n")
+            print(f"Cookies: {cookies}")
+        else:
+            print("failed to fetch url")
     elif args.tool == "commit":
         commitmsg = run()
         if commitmsg:
