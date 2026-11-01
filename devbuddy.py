@@ -12,6 +12,7 @@ from modules.dependanalyse import find_dependencies, scan_txt, scan_toml
 from modules.explain import explain_code, explain_error
 from modules.weather import get_weather
 from modules.uuid import generate_uuid
+from modules.base64 import encode, decode
 
 def get_width():
     try:
@@ -28,7 +29,7 @@ def main():
 
     parser = argparse.ArgumentParser( prog= "devbuddy", description="Your personal dev toolkit.")
 
-    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime", "env", "analyse", "explain", "weather", "uuid"], help="Tool you want to use...")
+    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime", "env", "analyse", "explain", "weather", "uuid", "base64"], help="Tool you want to use...")
 
     args = parser.parse_args()
 
@@ -104,6 +105,16 @@ def main():
     elif args.tool == "uuid":
         option = input("Choose UUID method: (random, time, name): ")
         print(generate_uuid(option))
+    elif args.tool == "base64":
+        action = input("encode or decode? (e/d): ")
+        if action.lower() == "e":
+            text = input("text to encode: ")
+            print(encode(text))
+        elif action.lower() == "d":
+            text = input("text to decode: ")
+            print(decode(text))
+        else:
+            print("innvalid action")
 
 if __name__ == "__main__":
     main()
