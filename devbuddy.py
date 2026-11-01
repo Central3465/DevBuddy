@@ -7,6 +7,7 @@ from modules.getcommit import get_commit
 from modules.pomodoro import start
 from modules.commitgenerator import run
 from modules.uptime import check
+from modules.env import list, scan 
 
 def get_width():
     try:
@@ -23,7 +24,7 @@ def main():
 
     parser = argparse.ArgumentParser( prog= "devbuddy", description="Your personal dev toolkit.")
 
-    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime"], help="Tool you want to use...")
+    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime", "env"], help="Tool you want to use...")
 
     args = parser.parse_args()
 
@@ -50,6 +51,9 @@ def main():
             print(f"Cookies: {cookies}")
         else:
             print("failed to fetch url")
+    elif args.tool == "env":
+        list()
+        scan()
     elif args.tool == "commit":
         commitmsg = run()
         if commitmsg:
