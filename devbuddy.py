@@ -10,6 +10,7 @@ from modules.uptime import check
 from modules.env import list, scan 
 from modules.dependanalyse import find_dependencies, scan_txt, scan_toml
 from modules.explain import explain_code, explain_error
+from modules.weather import get_weather
 
 def get_width():
     try:
@@ -26,7 +27,7 @@ def main():
 
     parser = argparse.ArgumentParser( prog= "devbuddy", description="Your personal dev toolkit.")
 
-    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime", "env", "analyse", "explain"], help="Tool you want to use...")
+    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime", "env", "analyse", "explain", "weather"], help="Tool you want to use...")
 
     args = parser.parse_args()
 
@@ -66,6 +67,10 @@ def main():
             explanation = explain_error(error)
             print("\nExplanation:\n")
             print(explanation)
+    elif args.tool == "weather":
+        city = input("Enter the city name: ")
+        data = get_weather(city)
+        print(data)
     elif args.tool == "uptime":
         url = input("URL to check uptime: ")
         print("Checking\n", url)
