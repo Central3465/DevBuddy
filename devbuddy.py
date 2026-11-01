@@ -9,6 +9,7 @@ from modules.commitgenerator import run
 from modules.uptime import check
 from modules.env import list, scan 
 from modules.dependanalyse import find_dependencies, scan_txt, scan_toml
+from modules.explain import explain_code, explain_error
 
 def get_width():
     try:
@@ -25,7 +26,7 @@ def main():
 
     parser = argparse.ArgumentParser( prog= "devbuddy", description="Your personal dev toolkit.")
 
-    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime", "env", "analyse"], help="Tool you want to use...")
+    parser.add_argument( "tool", choices=["todo", "codex", "give-me-motivation", "version", "pomodoro", "commit", "uptime", "env", "analyse", "explain"], help="Tool you want to use...")
 
     args = parser.parse_args()
 
@@ -53,6 +54,18 @@ def main():
                 scan_txt(file)
             elif file.endswith(".toml"):
                 scan_toml(file)
+    elif args.tool == "explain":
+        question = input("What do you want the ai to do? (explain code or explain error): ")
+        if question.lower() == "explain code":
+            code = input("Please paste the cod here:\n")
+            explanation = explain_code(code)
+            print("\nExplanation:\n")
+            print(explanation)
+        elif question.lower() == "explain error":
+            error = input("paste the error here:\n")
+            explanation = explain_error(error)
+            print("\nExplanation:\n")
+            print(explanation)
     elif args.tool == "uptime":
         url = input("URL to check uptime: ")
         print("Checking\n", url)
