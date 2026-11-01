@@ -50,7 +50,10 @@ def get_weather(city):
         )
 
         response.raise_for_status()
-        return response.json()
+
+        data = response.json()
+        current_weather = data.get("current", {})
+        return current_weather
 
     except requests.exceptions.Timeout:
         return "Timed out, try again later."
